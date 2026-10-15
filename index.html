@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta
+    name="description"
+    content="A practical deployment-readiness and risk-planning tool for field engineers."
+  >
+  <title>FieldOps Deployment Studio</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="FieldOps Deployment Studio home">
+      <span class="brand-mark" aria-hidden="true">F</span>
+      <span>FieldOps <span class="brand-muted">Deployment Studio</span></span>
+    </a>
+    <span class="offline-badge"><span></span> Runs locally</span>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">FIELD ENGINEERING · DEPLOYMENT PLANNING</p>
+        <h1>Make the first deployment<br>the <span>right</span> deployment.</h1>
+        <p class="hero-copy">
+          Assess site readiness, uncover operational risks, and prepare a clear
+          customer briefing before an AI system goes live.
+        </p>
+      </div>
+      <div class="hero-icon" aria-hidden="true">
+        <span class="orbit orbit-one"></span>
+        <span class="orbit orbit-two"></span>
+        <span class="orbit orbit-three"></span>
+        <span class="orbit-core">↗</span>
+      </div>
+    </section>
+
+    <section class="project-bar" aria-label="Project details">
+      <label>
+        Project name
+        <input id="projectName" type="text" maxlength="80" placeholder="e.g. Northstar pilot">
+      </label>
+      <label>
+        Customer site
+        <input id="siteName" type="text" maxlength="80" placeholder="e.g. Warehouse 04">
+      </label>
+      <label>
+        Deployment scenario
+        <select id="scenarioSelect"></select>
+      </label>
+    </section>
+
+    <section class="dashboard" aria-label="Deployment readiness dashboard">
+      <article class="panel checklist-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">01 / SITE VALIDATION</p>
+            <h2>Readiness checklist</h2>
+          </div>
+          <span class="section-icon" aria-hidden="true">✓</span>
+        </div>
+        <p class="panel-intro">
+          Confirm the conditions that make a deployment safe and supportable.
+          Items marked <span class="critical-mark">*</span> are go-live gates.
+        </p>
+        <div id="checklist" class="checklist"></div>
+        <div class="progress-wrap">
+          <div class="progress-label">
+            <span>Checklist completion</span>
+            <strong id="readinessValue">0%</strong>
+          </div>
+          <div
+            class="progress-track"
+            role="progressbar"
+            aria-label="Checklist completion"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+            id="readinessProgress"
+          >
+            <span id="readinessBar"></span>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel risk-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">02 / CONSEQUENCE MODEL</p>
+            <h2>Risk & mitigation</h2>
+          </div>
+          <span class="section-icon risk-icon" aria-hidden="true">!</span>
+        </div>
+        <p class="panel-intro">
+          Estimate likelihood and impact from 1 (low) to 5 (high). Update both
+          values as site evidence becomes available.
+        </p>
+        <div id="riskList" class="risk-list"></div>
+        <div class="risk-summary">
+          <div>
+            <span class="summary-label">Exposure score</span>
+            <strong id="riskValue">0 / 100</strong>
+          </div>
+          <span id="riskBand" class="risk-band">Low exposure</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="decision-panel" aria-live="polite">
+      <div id="decisionIcon" class="decision-icon" aria-hidden="true">↗</div>
+      <div class="decision-copy">
+        <p class="eyebrow">DEPLOYMENT RECOMMENDATION</p>
+        <h2 id="decisionTitle">Complete the assessment</h2>
+        <p id="decisionText">Your recommendation will appear as you update the checklist and risks.</p>
+      </div>
+      <div class="decision-stats">
+        <div><span>Readiness</span><strong id="decisionReadiness">0%</strong></div>
+        <div><span>Exposure</span><strong id="decisionExposure">0/100</strong></div>
+      </div>
+    </section>
+
+    <section class="briefing-panel panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">03 / CUSTOMER HANDOFF</p>
+          <h2>Field briefing</h2>
+        </div>
+        <span class="section-icon briefing-icon" aria-hidden="true">↗</span>
+      </div>
+      <p class="panel-intro">
+        A concise, customer-ready summary updates automatically from your assessment.
+      </p>
+      <div id="briefing" class="briefing" aria-live="polite"></div>
+      <div class="action-row">
+        <button id="copyBriefing" class="button button-secondary" type="button">
+          Copy briefing
+        </button>
+        <button id="exportReport" class="button button-primary" type="button">
+          Export deployment report
+        </button>
+        <button id="resetAssessment" class="button button-quiet" type="button">
+          Reset
+        </button>
+        <span id="actionMessage" class="action-message" role="status"></span>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>FieldOps Deployment Studio</span>
+      <span>Plan carefully. Test safely. Keep the customer informed.</span>
+    </footer>
+  </main>
+</body>
+</html>
